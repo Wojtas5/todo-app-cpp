@@ -14,5 +14,9 @@ add_subdirectory(tests)
 file(GLOB SRCS "src/*.cpp")
 
 add_executable(TodoApp ${SRCS})
-target_link_libraries(TodoApp PRIVATE Poco::Util Poco::Net)
+target_link_libraries(TodoApp PRIVATE
+    Poco::Util
+    Poco::Net
+    Poco::DataSQLite
+)
 target_include_directories(TodoApp PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")

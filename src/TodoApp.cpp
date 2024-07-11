@@ -1,3 +1,4 @@
+#include "Poco/Data/SQLite/Connector.h"
 #include "Poco/Net/HTTPServer.h"
 #include "TodoApp.h"
 #include "MyRequestHandlerFactory.h"
@@ -6,13 +7,20 @@ using Poco::Net::ServerSocket;
 using Poco::Net::HTTPServerParams;
 using Poco::Net::HTTPServer;
 
+TodoApp::TodoApp()
+{}
+
 void TodoApp::initialize(Application& self)
 {
+    Poco::Data::SQLite::Connector::registerConnector();
+    session = std::make_unique<Poco::Data::Session>("SQLite", "todo.db");
+    initDatabase();
     ServerApplication::initialize(self);
 }
 
 void TodoApp::uninitialize()
 {
+    Poco::Data::SQLite::Connector::unregisterConnector();
     ServerApplication::uninitialize();
 }
 
@@ -34,4 +42,13 @@ int TodoApp::main(const std::vector<std::string>& args)
     logger().information("Server stopped");
 
     return Application::EXIT_OK;
+}
+
+void TodoApp::initDatabase()
+{
+    *session << "CREATE TABLE IF NOT EXISTS Todo ("
+        "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+        "title TEXT, "
+        "completed BOOLEAN)",
+        Poco::Data::Keywords::now;
 }
