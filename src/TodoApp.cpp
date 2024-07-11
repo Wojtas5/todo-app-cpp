@@ -1,7 +1,7 @@
 #include "Poco/Data/SQLite/Connector.h"
 #include "Poco/Net/HTTPServer.h"
 #include "TodoApp.h"
-#include "MyRequestHandlerFactory.h"
+#include "RequestHandlerFactory.h"
 
 using Poco::Net::ServerSocket;
 using Poco::Net::HTTPServerParams;
@@ -32,7 +32,7 @@ int TodoApp::main(const std::vector<std::string>& args)
     params->setMaxQueued(100);
     params->setMaxThreads(16);
 
-    HTTPServer server(new MyRequestHandlerFactory, socket, params);
+    HTTPServer server(new RequestHandlerFactory, socket, params);
     server.start();
     logger().information(Poco::format("Server started on port %d", port));
 
