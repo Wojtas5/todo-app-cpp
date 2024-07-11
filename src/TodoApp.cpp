@@ -30,7 +30,7 @@ int TodoApp::main(const std::vector<std::string>& args)
     ServerSocket socket(port);
     HTTPServerParams::Ptr params = new HTTPServerParams;
     params->setMaxQueued(100);
-    params->setMaxThreads(16);
+    params->setMaxThreads(std::thread::hardware_concurrency());
 
     HTTPServer server(new RequestHandlerFactory, socket, params);
     server.start();
