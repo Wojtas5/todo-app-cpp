@@ -1,3 +1,6 @@
+#ifndef TODOAPP_H
+#define TODOAPP_H
+
 #include "Poco/Util/ServerApplication.h"
 #include "Poco/Data/Session.h"
 
@@ -16,3 +19,5 @@ private:
 
     std::unique_ptr<Poco::Data::Session> session;
 };
+
+#endif // TODOAPP_H
