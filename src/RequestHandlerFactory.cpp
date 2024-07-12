@@ -5,6 +5,10 @@
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPServerRequest;
 
+RequestHandlerFactory::RequestHandlerFactory(TodoDatabase& database) :
+    _todo_database(database)
+{}
+
 HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
     const HTTPServerRequest& request)
 {
@@ -15,6 +19,6 @@ HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
     }
     else if (uri == "/todo")
     {
-        return new TodoRequestHandler();
+        return nullptr;
     }
 }

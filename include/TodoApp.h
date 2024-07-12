@@ -2,7 +2,7 @@
 #define TODOAPP_H
 
 #include "Poco/Util/ServerApplication.h"
-#include "Poco/Data/Session.h"
+#include "TodoDatabase.h"
 
 class TodoApp : public Poco::Util::ServerApplication
 {
@@ -17,7 +17,7 @@ protected:
 private:
     void initDatabase();
 
-    std::unique_ptr<Poco::Data::Session> session;
+    std::unique_ptr<TodoDatabase> _todo_database;
 };
 
 #endif // TODOAPP_H
