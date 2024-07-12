@@ -4,7 +4,6 @@
 #include "Poco/Net/HTTPRequestHandler.h"
 #include "TodoDatabase.h"
 
-
 class TodoRequestHandler : public Poco::Net::HTTPRequestHandler
 {
 public:
@@ -13,6 +12,9 @@ public:
         Poco::Net::HTTPServerResponse& response) override;
 
 private:
+    void addTodo(
+        Poco::Net::HTTPServerRequest& request, Poco::Net::HTTPServerResponse& response);
+    void getTodos(Poco::Net::HTTPServerResponse& response);
 
     TodoDatabase& _db;
 };
