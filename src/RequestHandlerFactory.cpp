@@ -19,6 +19,10 @@ HTTPRequestHandler* RequestHandlerFactory::createRequestHandler(
     }
     else if (uri == "/todo")
     {
+        return new TodoRequestHandler(_todo_database);
+    }
+    else
+    {
         return nullptr;
     }
 }
