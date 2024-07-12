@@ -14,7 +14,7 @@ public:
 private:
     void initDatabase();
 
-    Poco::Data::Session _session;
+    std::unique_ptr<Poco::Data::Session> _session;
 };
 
 #endif // TODODATABASE_H
